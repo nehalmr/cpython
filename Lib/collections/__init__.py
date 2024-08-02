@@ -1527,6 +1527,12 @@ class UserString(_collections_abc.Sequence):
 
     def join(self, seq):
         return self.data.join(seq)
+    
+    def join(self, iterable):
+        if not all(isinstance(item, str) for item in iterable):
+            raise TypeError("All items in the iterable must be strings")
+        return self.data.join(iterable)
+
 
     def ljust(self, width, *args):
         return self.__class__(self.data.ljust(width, *args))
